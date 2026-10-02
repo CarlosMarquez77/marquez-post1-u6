@@ -89,6 +89,22 @@ Evidencia:
   `Math.max(descuentoTipoCliente, contexto.getDescuentoCampana())`: el
   descuento quedó repartido entre la cadena y el Strategy.
 
+**Patrón aplicado:** Strategy, extendiendo SelectorEstrategiaDescuento
+con CalculadorDescuentoFinal. Los tres eslabones mal aplicados y el
+campo descuentoCampana se eliminaron del código (no se comentaron,
+para no dejar un Lava Flow) y su historial queda documentado
+únicamente en los commits de este repositorio.
+
+- Las campañas se modelaron como EstrategiaDescuento porque, igual que
+  DescuentoVip y DescuentoFrecuente, calculan un porcentaje sin depender
+  de un orden ni cortar el flujo del pedido. Mantenerlas en la cadena se
+  descartó porque era la causa del antipatrón.
+- CalculadorDescuentoFinal toma el mayor entre el descuento por tipo de
+  cliente y el de las campañas, la misma regla que antes pero en un solo
+  lugar.
+- Las pruebas de las campañas (GestorPedidosTest y BlackFridayTest) dan
+  los mismos totales con los eslabones y con las estrategias.
+
 ## Cómo ejecutar
 ```
 $ mvn spring-boot:run
@@ -98,3 +114,15 @@ $ mvn test
 ## Herramientas utilizadas
 - Java 17, Spring Boot, Spring JDBC, Maven, H2 Database
 - VS Code / IntelliJ IDEA, Git, GitHub
+
+## Conclusiones
+Antes de aplicar un patrón hay que diagnosticar con evidencia: al
+revisar las líneas de GestorPedidos se vio que había dos problemas
+juntos y que cada responsabilidad pedía una solución distinta, una
+cadena para las validaciones y una estrategia para los descuentos. Las
+pruebas escritas antes de refactorizar sirvieron para confirmar que la
+salida no cambió. En la Parte 2 aprendí que conocer un patrón no
+garantiza usarlo bien: la cadena había funcionado y por eso se usó para
+las campañas, que no validan nada ni dependen de un orden. Corregirlo
+fue sencillo porque el Strategy ya existía, y el código descartado se
+borró en vez de dejarlo comentado.
