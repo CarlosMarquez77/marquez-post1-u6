@@ -3,6 +3,7 @@ INSERT INTO clientes (id, nombre, tipo_cliente) VALUES (2, 'Andres Perez', 'FREC
 INSERT INTO clientes (id, nombre, tipo_cliente) VALUES (3, 'Jorge Castro', 'MOROSO');
 INSERT INTO clientes (id, nombre, tipo_cliente) VALUES (4, 'Camila Duarte', 'ESTANDAR');
 INSERT INTO clientes (id, nombre, tipo_cliente) VALUES (5, 'Cliente sin registrar', NULL);
+INSERT INTO clientes (id, nombre, tipo_cliente, nit) VALUES (6, 'Papeleria El Saber SAS', 'ESTANDAR', '900123456-7');
 
 -- deuda pendiente del cliente moroso: 150000
 INSERT INTO facturas (cliente_id, monto, pagada) VALUES (3, 100000, FALSE);

@@ -1,7 +1,8 @@
 CREATE TABLE clientes (
     id           BIGINT PRIMARY KEY,
     nombre       VARCHAR(100) NOT NULL,
-    tipo_cliente VARCHAR(20)
+    tipo_cliente VARCHAR(20),
+    nit          VARCHAR(20)
 );
 
 CREATE TABLE facturas (

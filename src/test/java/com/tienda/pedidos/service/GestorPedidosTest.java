@@ -81,4 +81,18 @@ class GestorPedidosTest {
         assertTrue(r.isConfirmado());
         assertEquals(218960.0, r.getTotal(), 0.01);
     }
+
+    @Test
+    void campanaCorporativo() {
+        ResultadoPedido r = procesar(6L, 1L, 1); // cliente con NIT, descuento 10%
+        assertTrue(r.isConfirmado());
+        assertEquals(107100.0, r.getTotal(), 0.01);
+    }
+
+    @Test
+    void campanaVolumen() {
+        ResultadoPedido r = procesar(4L, 3L, 25); // mas de 20 unidades, descuento 12%
+        assertTrue(r.isConfirmado());
+        assertEquals(130900.0, r.getTotal(), 0.01);
+    }
 }
